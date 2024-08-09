@@ -28,17 +28,19 @@ const Note = ({note, onNoteClicked, className, onDeleteNoteClicked}: NoteProps) 
   return (
     <Card className={`${styles.noteCard} ${className}`} onClick={() => onNoteClicked && onNoteClicked(note)}>
       <Card.Body>
-        <Card.Title>
-          {title} 
-          <MdDelete 
-          className='text-muted ms-auto'
-          onClick={(e) => {
-            onDeleteNoteClicked(note);
-            e.stopPropagation();
-          }}
-          /> 
-          </Card.Title> 
-        <Card.Text className={styles.cardText}>{text}</Card.Text>
+        <div className="d-flex justify-content-between align-items-center">
+          <Card.Title className="mb-0">
+            {title}
+          </Card.Title>
+          <MdDelete
+            className="text-muted ms-2"
+            onClick={(e) => {
+              onDeleteNoteClicked(note);
+              e.stopPropagation();
+            }}
+          />
+        </div>
+        <Card.Text className={`${styles.cardText} mt-2`}>{text}</Card.Text>
       </Card.Body>
       <Card.Footer>
         <small className="text-muted">{createdUpdatedText}</small>
