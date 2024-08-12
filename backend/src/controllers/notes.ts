@@ -4,6 +4,7 @@ import createHttpError from "http-errors";
 import mongoose from "mongoose";
 import { assertIsDefined } from "../utils/assertIsDefined";
 
+
 export const getNotes: RequestHandler = async (req, res, next) => {
     const authenticatedUserId =req.session.userId;
     try {
