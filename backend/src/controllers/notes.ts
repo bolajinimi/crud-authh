@@ -139,7 +139,6 @@ export const deleteNote: RequestHandler<updateNoteParams, unknown, unknown, unkn
        
 
         res.sendStatus(204).send();
-
     } catch (error) {
         next(error);
     }
