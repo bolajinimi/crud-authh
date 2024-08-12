@@ -1,13 +1,16 @@
-import {Container} from 'react-bootstrap';
-import styles from './styles/NotesPage.module.css';
+
 import SignUpModal from './components/SignUpModal';
 import LoginModal from './components/LoginModal';
 import NavBar from './components/NavBar';
 import {User} from './models/user';
 import {useEffect, useState} from "react";
 import * as NotesApi from "./network/notes_api"
-import NotesPageLoggedInView from './components/NotesPageLoggedInView';
-import NotesPageLoggedOutView from './components/NotesPageLoggedOutView';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+import NotesPage from './pages/NotesPage';
+import PrivacyPage from './pages/PrivacyPage';
+import NotFoundPage from './pages/NotFoundPage';
+
 
 
 function App() {
@@ -30,6 +33,7 @@ useEffect(() =>{
 
 
   return (
+    <BrowserRouter>
     <div>
       <NavBar
       loggedInUser={loggedInUser}
@@ -40,17 +44,23 @@ useEffect(() =>{
         setLoggedInUser(null);
       }}
       />
-    <Container className={styles.notesPage}> 
-        <>
-        {
-          loggedInUser
-            ? <NotesPageLoggedInView/>
-            : <NotesPageLoggedOutView/>
-        }
-        </>
-        
-      
-    </Container>
+      <Container>
+        <Routes>
+          <Route
+          path="/"
+          element={<NotesPage loggedInUser={loggedInUser}/>}
+          />
+          <Route
+          path="/privacy"
+          element={<PrivacyPage/>}
+          />
+          <Route
+          path="/*"
+          element={<NotFoundPage/>}
+          />
+        </Routes>
+      </Container>
+   
     {
           showSignUpModal&&
           
@@ -78,6 +88,7 @@ useEffect(() =>{
           />
         }
     </div>
+  </BrowserRouter>
   );
 }
 

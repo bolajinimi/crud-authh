@@ -12,6 +12,7 @@ const NavBarLoggedInView = ({user, onLogoutSuccessful}: NavBarLoggedInViewProps 
     async function logout(){
         try {
             await NotesApi.logout
+            onLogoutSuccessful();
         } catch (error) {
             console.error(error)
                 alert(error);
